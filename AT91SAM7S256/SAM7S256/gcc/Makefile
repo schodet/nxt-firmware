@@ -45,7 +45,7 @@ ASFLAGS = -g -mcpu=$(MCU) $(THUMB) $(THUMB_INTERWORK)
 CPPFLAGS = $(INCLUDES) $(DEFINES) -MMD
 LDSCRIPT = nxt.ld
 LDFLAGS = -nostdlib -T $(LDSCRIPT) -Wl,--gc-sections
-LDLIBS = -lc -lm -lgcc
+LDLIBS = -lc -lm -lgcc -lnosys
 
 ifeq ($(ARMDEBUG),y)
 ASM_ARM_SOURCE += abort_handler.S undef_handler.S debug_hexutils.S \
