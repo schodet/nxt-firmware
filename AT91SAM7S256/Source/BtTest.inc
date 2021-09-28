@@ -2,6 +2,10 @@
 
 //#define TESTPRG                     // If defined the test program will be included
 
+#ifndef BUILD_DATE
+# define BUILD_DATE ""
+#endif
+
 #ifdef TESTPRG
 #include  "Test1.txt"
 #include  "Test2.txt"
@@ -9,69 +13,17 @@
 
 extern    void BtIo(void);
 
-const     char  BUILD_DATE[] = __DATE__;
-const     char  BUILD_TIME[] = __TIME__;
-
-const     char  MONTH[]  = "JanFebMarAprMayJunJulAugSepOctNovDec";
-
 void      GetProtocolVersion(UBYTE *String)
 {
-  UWORD   Tmp;
-  
-  Tmp = FIRMWAREVERSION & 0x00FF;
-
-  if (Tmp < 100)
-  {
-#ifdef CUSTOM_FIRMWAREVERSION
-    int pad = (sizeof (CUSTOM_FIRMWAREVERSION) - 1) > 7 ? 1 : 1 + 7 - (sizeof (CUSTOM_FIRMWAREVERSION) - 1);
-    sprintf((char*)String,"FW %*u.%02ui-%.7s", pad, (FIRMWAREVERSION >> 8) & 0x00FF,Tmp & 0x00FF, CUSTOM_FIRMWAREVERSION);
-#else
-    sprintf((char*)String,"FW        %3u.%02u",(FIRMWAREVERSION >> 8) & 0x00FF,Tmp & 0x00FF);
-#endif
-  }
-  else
-  {
-    sprintf((char*)String,"FW     Hex %2X.%02X",(FIRMWAREVERSION >> 8) & 0x00FF,Tmp & 0x00FF);
-  }
+  char    Tmp[DISPLAYLINE_LENGTH + 1];
+  snprintf(Tmp, sizeof(Tmp), "%d.%d.%d", (FIRMWAREVERSION >> 8) & 0xFF, FIRMWAREVERSION & 0xFF, FIRMWAREPATCH);
+  snprintf((char*)String, DISPLAYLINE_LENGTH + 1, "FWi %*s", DISPLAYLINE_LENGTH - 4, Tmp);
 }
 
 
 void      GetARMBuild(UBYTE *String)
 {
-  UWORD   Tmp;
-  UWORD   Lng;
-  char    String1[4];
-  char    String2[4];
-
-  String1[0] = BUILD_DATE[4];
-  String1[1] = BUILD_DATE[5];
-  String1[2] = 0;
-
-  Tmp = (UWORD)atoi(String1);
-  Lng  = 0;
-  Lng += sprintf((char*)&String[Lng],"BUILD ");
-  Lng += sprintf((char*)&String[Lng],"%02u",Tmp);
-
-  String1[0] = BUILD_DATE[0];
-  String1[1] = BUILD_DATE[1];
-  String1[2] = BUILD_DATE[2];
-  String1[3] = 0;
-  String2[3] = 0;
-
-  Tmp = 0;
-  do
-  {
-    String2[0] = MONTH[0 + 3 * Tmp];
-    String2[1] = MONTH[1 + 3 * Tmp];
-    String2[2] = MONTH[2 + 3 * Tmp];
-    Tmp++;
-  }
-  while ((Tmp < 12) && (strcmp(String1,String2) != 0));
-
-  Lng += sprintf((char*)&String[Lng],"%02u",Tmp);
-  Lng += sprintf((char*)&String[Lng],"%c%c",BUILD_DATE[9],BUILD_DATE[10]);
-  Lng += sprintf((char*)&String[Lng],"%c%c",BUILD_TIME[0],BUILD_TIME[1]);
-  Lng += sprintf((char*)&String[Lng],"%c%c",BUILD_TIME[3],BUILD_TIME[4]);
+  snprintf((char*)String, DISPLAYLINE_LENGTH + 1, "%s", BUILD_DATE);
 }
 
 
@@ -261,9 +213,9 @@ UBYTE     TestPrg(UBYTE Dummy)
     case SYSTEM_INIT :
     {
       GetProtocolVersion(TxtBuffer[0]);
-      GetAVRBuild(TxtBuffer[1]);
-      GetBC4Build(TxtBuffer[2]);
-      GetARMBuild(TxtBuffer[3]);
+      GetARMBuild(TxtBuffer[1]);
+      GetAVRBuild(TxtBuffer[2]);
+      GetBC4Build(TxtBuffer[3]);
       GetBC4Address(TxtBuffer[4]);
 
       pMapDisplay->pTextLines[TEXTLINE_3] = (UBYTE*)TxtBuffer[0];

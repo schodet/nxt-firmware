@@ -3,8 +3,13 @@ SRCDIR = $(BASE)/Source
 DBGDIR = $(BASE)/armdebug/Debugger
 CPUINCDIR = $(BASE)/SAM7S256/Include
 
-GIT_VERSION := $(shell git rev-parse --short=7 HEAD)
-CUSTOM_FIRMWAREVERSION = $(GIT_VERSION)
+DATE_FMT = +%Y-%m-%dT%H:%M
+ifndef SOURCE_DATE_EPOCH
+    SOURCE_DATE_EPOCH = $(shell git log -1 --pretty=%ct)
+endif
+BUILD_DATE ?= $(shell LC_ALL=C date -u -d "@$(SOURCE_DATE_EPOCH)" "$(DATE_FMT)" 2>/dev/null \
+	      || LC_ALL=C date -u -r "$(SOURCE_DATE_EPOCH)" "$(DATE_FMT)" 2>/dev/null \
+	      || LC_ALL=C date -u "$(DATE_FMT)")
 
 TARGET = nxt_firmware
 
@@ -33,7 +38,7 @@ INCLUDES =
 
 MCU = arm7tdmi
 STARTOFUSERFLASH_DEFINES = -DSTARTOFUSERFLASH_FROM_LINKER=1
-VERSION_DEFINES = -DCUSTOM_FIRMWAREVERSION=\"$(CUSTOM_FIRMWAREVERSION)\"
+VERSION_DEFINES = -D'BUILD_DATE="$(BUILD_DATE)"'
 DEFINES = -DPROTOTYPE_PCB_4 -DNEW_MENU -DROM_RUN -DVECTORS_IN_RAM \
 	  $(STARTOFUSERFLASH_DEFINES) $(VERSION_DEFINES)
 OPTIMIZE = -Os -fno-strict-aliasing \
@@ -91,12 +96,12 @@ $(THUMB_OBJECTS): THUMB = -mthumb
 
 -include $(OBJECTS:%.o=%.d)
 
-LAST_CUSTOM_FIRMWAREVERSION=none
+LAST_BUILD_DATE=none
 -include version.mak
-ifneq ($(LAST_CUSTOM_FIRMWAREVERSION),$(CUSTOM_FIRMWAREVERSION))
+ifneq ($(LAST_BUILD_DATE),$(BUILD_DATE))
 .PHONY: version.mak
 version.mak:
-	echo "LAST_CUSTOM_FIRMWAREVERSION = $(CUSTOM_FIRMWAREVERSION)" > $@
+	echo "LAST_BUILD_DATE = $(BUILD_DATE)" > $@
 endif
 
 c_ui.o: version.mak
