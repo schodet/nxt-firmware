@@ -1,0 +1,31 @@
+.Dd October 19, 2016
+.Dt NXT-UPDATE-FIRMWARE 1
+.Os Debian
+.Sh NAME
+.Nm nxt\-update\-firmware
+.Nd wrapper script to flash NXT firmware
+.Sh SYNOPSIS
+.Nm
+.Sh DESCRIPTION
+.Nm
+is a wrapper script that uses the
+.Nm fwflash
+utility from the libnxt package to flash the improved LEGO NXT firmware
+to an NXT brick.
+.Pp
+The script calls
+.Nm fwflash
+with the default path to the firmware in Debian and returns its error
+code.
+.Sh FILES
+.Bl -tag -width Ds -compact
+.It Pa /usr/share/nxt\-firmware/nxt_firmware.bin
+Path to the NXT firmware file.
+.El
+.Sh SEE ALSO
+.Xr fwflash 1
+.Sh AUTHORS
+Written for the Debian project by
+.An Dominik George Aq Mt nik@naturalnet.de .
+The code does not qualify for copyright protection; it is shipped with the nxt\-firmware package, see the copyright file under
+.Pa /usr/share/doc/nxt\-firmware/copyright .

@@ -1,0 +1,3 @@
+The nxt-update-firmware script can be used in distribution packages to ease
+the flashing of a firmware binary installed on the system. You may have to
+customize it to match the installation path and the fwflash package name.

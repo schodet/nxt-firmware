@@ -1,0 +1,21 @@
+#!/bin/sh
+
+pathfind() {
+    OLDIFS="$IFS"
+    IFS=:
+    for p in $PATH; do
+        if [ -x "$p/$*" ]; then
+            IFS="$OLDIFS"
+            return 0
+        fi
+    done
+    IFS="$OLDIFS"
+    return 1
+}
+
+if ! pathfind fwflash; then
+	echo You need to install the libnxt package to flash firmware to NXT bricks. >&2
+	exit 1
+fi
+
+fwflash /usr/share/nxt-firmware/nxt_firmware.bin
