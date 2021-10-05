@@ -1,4 +1,6 @@
 #!/bin/sh
+# Written by Dominik George <nik@naturalnet.de>, who stated the code does not
+# qualify for copyright protection.
 
 pathfind() {
     OLDIFS="$IFS"
