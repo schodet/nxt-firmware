@@ -19,11 +19,20 @@ License
 -------
 
 NXT Improved Firmware combines code covered by the LEGO Open Source License
-with code covered by various other open source licenses.  Any file not covered
-by the LEGO Open Source License includes a notice in its header.  All other
-source files are covered by the LEGO Open Source License.  Please see the
+with code covered by various other open source licenses.  Please see the
 enclosed "LEGO Open Source License" file for more precision on this license
 conditions.
+
+Details:
+
+- src/*: LEGO Open Source License.
+- src/d_sound_adpcm.r: Permissive license, see header.
+- lib/*: Expat license, see header.
+- lib/strtod.c: Permissive license, see header.
+- include/*: see header (provided "as is").
+- startup/*: see header (provided "as is").
+- armdebug/*: see armdebug/README (dual, LEGO Open Source License or GPLv2).
+- contrib/*: see header.
 
 LEGO(R) is a trademark of the LEGO Group of companies which does not sponsor,
 authorize or endorse NXT Improved Firmware.
