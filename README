@@ -10,9 +10,9 @@ including documentation, building guides, and more:
 Quick start
 -----------
 
-To build the firmware, run make in the AT91SAM7S256/SAM7S256/gcc directory. It
-will produce a nxt_firmware.bin file that you can flash with your tool of
-choice. For example, you can use fwflash from libnxt.
+To build the firmware, run make in this directory. It will produce a
+nxt_firmware.bin file that you can flash with your tool of choice. For
+example, you can use fwflash from libnxt.
 
 
 License

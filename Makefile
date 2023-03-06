@@ -1,7 +1,9 @@
-BASE = ../..
-SRCDIR = $(BASE)/Source
+BASE = .
+SRCDIR = $(BASE)/src
+LIBDIR = $(BASE)/lib
 DBGDIR = $(BASE)/armdebug/Debugger
-CPUINCDIR = $(BASE)/SAM7S256/Include
+CPUINCDIR = $(BASE)/include
+STARTUPDIR = $(BASE)/startup
 
 DATE_FMT = +%Y-%m-%dT%H:%M
 ifndef SOURCE_DATE_EPOCH
@@ -30,11 +32,11 @@ ASM_ARM_SOURCE = Cstartup.S
 ASM_THUMB_SOURCE =
 
 vpath %.c $(SRCDIR)
-vpath %.c $(CPUINCDIR)
-vpath %.c lib
-vpath %.S $(CPUINCDIR)
+vpath %.c $(LIBDIR)
+vpath %.c $(STARTUPDIR)
+vpath %.S $(STARTUPDIR)
 
-INCLUDES =
+INCLUDES = -I$(CPUINCDIR)
 
 MCU = arm7tdmi
 STARTOFUSERFLASH_DEFINES = -DSTARTOFUSERFLASH_FROM_LINKER=1
@@ -48,7 +50,7 @@ THUMB_INTERWORK = -mthumb-interwork
 CFLAGS = -g -mcpu=$(MCU) $(THUMB) $(THUMB_INTERWORK) $(WARNINGS) $(OPTIMIZE)
 ASFLAGS = -g -mcpu=$(MCU) $(THUMB) $(THUMB_INTERWORK)
 CPPFLAGS = $(INCLUDES) $(DEFINES) -MMD
-LDSCRIPT = nxt.ld
+LDSCRIPT = $(LIBDIR)/nxt.ld
 LDFLAGS = -nostdlib -T $(LDSCRIPT) -Wl,--gc-sections
 LDLIBS = -lc -lm -lgcc -lnosys
 
@@ -58,7 +60,7 @@ ASM_ARM_SOURCE += abort_handler.S undef_handler.S debug_hexutils.S \
                   debug_runlooptasks.S
 vpath %.S $(DBGDIR)
 DEFINES += -DARMDEBUG
-INCLUDES += -I../../armdebug/Debugger
+INCLUDES += -I$(DBGDIR)
 endif
 
 CROSS_COMPILE = arm-none-eabi-
