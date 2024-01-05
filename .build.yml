@@ -1,0 +1,37 @@
+image: debian/stable
+packages:
+  - gcc-arm-none-eabi
+  - picolibc-arm-none-eabi
+  - wget
+  - unzip
+sources:
+  - https://git.sr.ht/~ni/nxt-firmware
+environment:
+  arm_url: https://developer.arm.com/-/media/Files/downloads/gnu/13.2.rel1/binrel/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-eabi.tar.xz?rev=e434b9ea4afc4ed7998329566b764309&hash=688C370BF08399033CA9DE3C1CC8CF8E31D8C441
+  arm_file: arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi.tar.xz
+  arm_dir: arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi
+  picolibc_url: https://keithp.com/picolibc/dist/gnu-arm-embedded/picolibc-1.8.6-13.2.Rel1.zip
+  picolibc_file: picolibc-1.8.6-13.2.Rel1.zip
+artifacts:
+  - nxt_firmware.rfw
+tasks:
+  - build-debian: |
+      cd nxt-firmware
+      arm-none-eabi-gcc --version
+      make
+      cp nxt_firmware.bin ~/nxt_firmware.rfw
+      make clean
+  - build-arm: |
+      # Only on build branch.
+      if [ "$GIT_REF" = "refs/heads/build-arm" ]; then \
+        wget --no-verbose -O $arm_file "$arm_url"; \
+        wget --no-verbose -O $picolibc_file "$picolibc_url"; \
+        tar xaf $arm_file; \
+        cd $HOME/$arm_dir; \
+        unzip -q $HOME/$picolibc_file; \
+        PATH=$HOME/$arm_dir/bin:$PATH; \
+        cd $HOME/nxt-firmware; \
+        arm-none-eabi-gcc --version; \
+        make; \
+        make clean; \
+      fi
