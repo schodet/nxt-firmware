@@ -25,7 +25,7 @@ THUMB_SOURCES = c_button.c c_cmd.c c_comm.c c_display.c c_input.c c_ioctrl.c \
 		d_ioctrl.c d_loader.c d_lowspeed.c d_output.c d_sound.c \
 		d_timer.c d_usb.c \
 		m_sched.c \
-		abort.c errno.c sbrk.c strtod.c sscanf.c \
+		sscanf.c \
 		Cstartup_SAM7.c
 
 ASM_ARM_SOURCE = Cstartup.S
@@ -47,12 +47,15 @@ OPTIMIZE = -Os -fno-strict-aliasing \
 	   -ffunction-sections -fdata-sections
 WARNINGS = -Wall -W -Wundef -Wno-unused -Wno-format
 THUMB_INTERWORK = -mthumb-interwork
-CFLAGS = -g -mcpu=$(MCU) $(THUMB) $(THUMB_INTERWORK) $(WARNINGS) $(OPTIMIZE)
-ASFLAGS = -g -mcpu=$(MCU) $(THUMB) $(THUMB_INTERWORK)
+SPECS = --specs=picolibc.specs
+CFLAGS = -g -mcpu=$(MCU) $(THUMB) $(THUMB_INTERWORK) \
+	 $(WARNINGS) $(OPTIMIZE) $(SPECS)
+ASFLAGS = -g -mcpu=$(MCU) $(THUMB) $(THUMB_INTERWORK) \
+	  $(SPECS)
 CPPFLAGS = $(INCLUDES) $(DEFINES) -MMD
 LDSCRIPT = $(LIBDIR)/nxt.ld
 LDFLAGS = -nostdlib -T $(LDSCRIPT) -Wl,--gc-sections
-LDLIBS = -lc -lm -lgcc -lnosys
+LDLIBS = -lc -lm -lgcc
 
 ifeq ($(ARMDEBUG),y)
 ASM_ARM_SOURCE += abort_handler.S undef_handler.S debug_hexutils.S \
