@@ -1,0 +1,8 @@
+#!/bin/sh -eux
+# Only update patch version.
+[ ${1%.*} = ${2%.*} ]
+a=${1##*.}
+b=${2##*.}
+sed -i src/c_loader.iom -e "s/\\(FIRMWAREPATCH *\\)$a/\\1$b/"
+git add src/c_loader.iom
+git commit -m "Change to version ${2}"
