@@ -5588,7 +5588,7 @@ NXT_STATUS cCmdInterpShortSubCall(CODE_WORD * const pCode)
   return Status;
 }
 
-ULONG moveSameInt= 0, moveDiffInt= 0, moveFloat= 0, moveArrInt= 0, moveOther= 0;
+ULONG moveSameInt= 0, moveDiffInt= 0, moveFloat= 0, moveIntFloat= 0, moveFloatInt= 0, moveArrInt= 0, moveOther= 0;
 NXT_STATUS cCmdMove(DATA_ARG Arg1, DATA_ARG Arg2)
 {
   NXT_STATUS Status;
@@ -5621,11 +5621,47 @@ NXT_STATUS cCmdMove(DATA_ARG Arg1, DATA_ARG Arg2)
       Status= NO_ERR;
     }
   }
-  else if(tc1 == TC_FLOAT && tc2 == TC_FLOAT) { // may also need to speed up float to int and int to float conversions
+  else if(tc1 == TC_FLOAT && tc2 == TC_FLOAT) { // float to float
     moveFloat++;
     pArg1= VarsCmd.pDataspace + TOC1Ptr->DSOffset;
     pArg2= VarsCmd.pDataspace + TOC2Ptr->DSOffset;
     *(float*)pArg1= *(float*)pArg2;
+    Status= NO_ERR;
+  }
+  else if(tc1 == TC_FLOAT && tc2 <= TC_LAST_INT_SCALAR) { // int to float
+    moveIntFloat++;
+    pArg1= VarsCmd.pDataspace + TOC1Ptr->DSOffset;
+    pArg2= VarsCmd.pDataspace + TOC2Ptr->DSOffset;
+    if (tc2 == TC_SLONG)
+      *(float*)pArg1 = *(SLONG*)pArg2;
+    else if (tc2 == TC_ULONG)
+      *(float*)pArg1 = *(ULONG*)pArg2;
+    else if (tc2 == TC_SBYTE)
+      *(float*)pArg1 = *(SBYTE*)pArg2;
+    else if (tc2 == TC_UBYTE)
+      *(float*)pArg1 = *(UBYTE*)pArg2;
+    else if (tc2 == TC_UWORD)
+      *(float*)pArg1 = *(UWORD*)pArg2;
+    else
+      *(float*)pArg1= *(SWORD*)pArg2;
+    Status= NO_ERR;
+  }
+  else if(tc2 == TC_FLOAT && tc1 <= TC_LAST_INT_SCALAR) { // float to int
+    moveFloatInt++;
+    pArg1= VarsCmd.pDataspace + TOC1Ptr->DSOffset;
+    pArg2= VarsCmd.pDataspace + TOC2Ptr->DSOffset;
+    if (tc1 == TC_SLONG)
+      *(SLONG*)pArg1 = *(float*)pArg2;
+    else if (tc1 == TC_ULONG)
+      *(ULONG*)pArg1 = *(float*)pArg2;
+    else if (tc1 == TC_SBYTE)
+      *(SBYTE*)pArg1 = *(float*)pArg2;
+    else if (tc1 == TC_UBYTE)
+      *(UBYTE*)pArg1 = *(float*)pArg2;
+    else if (tc1 == TC_UWORD)
+      *(UWORD*)pArg1 = *(float*)pArg2;
+    else
+      *(SWORD*)pArg1 = *(float*)pArg2;
     Status= NO_ERR;
   }
   //!!! Optimized move for arrays of ints.
