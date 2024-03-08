@@ -22,7 +22,7 @@
 //If these switch to little-endian, be sure to update
 //definition and usages of VM_OLDEST_COMPATIBLE_VERSION, too!
 #define   FIRMWAREVERSION               0x011D // x.y
-#define   FIRMWAREPATCH                 4 // .z, the third number
+#define   FIRMWAREPATCH                 5 // .z, the third number
 #define   PROTOCOLVERSION               0x017C //1.124
 
 enum
