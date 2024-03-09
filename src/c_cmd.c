@@ -3341,37 +3341,45 @@ void * cCmdResolveIODataArg(DATA_ARG DataArg, ULONG Offset, TYPE_CODE * TypeCode
 
 void cCmdSetValFlt(void * pVal, TYPE_CODE TypeCode, float NewVal)
 {
+  /*
+   * According to C standard, converting a float to integer is implementation
+   * defined when the number is out of integer bounds.
+   *
+   * To match original LEGO firmware, when casting float as integer, always
+   * convert to signed value, then cast as destination type.
+   */
 
   if (pVal)
   {
-    switch (TypeCode)
+    if (TypeCode == TC_FLOAT)
+      *(float*)pVal = NewVal;
+    else
     {
-      case TC_ULONG:
-      case TC_SLONG:
-      {
-        *(ULONG*)pVal = NewVal;
-      }
-      break;
+      SLONG i = NewVal;
 
-      case TC_UWORD:
-      case TC_SWORD:
+      switch (TypeCode)
       {
-        *(UWORD*)pVal = (UWORD)NewVal;
-      }
-      break;
+        case TC_ULONG:
+        case TC_SLONG:
+        {
+          *(ULONG*)pVal = i;
+        }
+        break;
 
-      case TC_UBYTE:
-      case TC_SBYTE:
-      {
-        *(UBYTE*)pVal = (UBYTE)NewVal;
-      }
-      break;
+        case TC_UWORD:
+        case TC_SWORD:
+        {
+          *(UWORD*)pVal = i;
+        }
+        break;
 
-      case TC_FLOAT:
-      {
-        *(float*)pVal = (float)NewVal;
+        case TC_UBYTE:
+        case TC_SBYTE:
+        {
+          *(UBYTE*)pVal = i;
+        }
+        break;
       }
-      break;
     }
   }
 
@@ -3460,7 +3468,14 @@ ULONG cCmdGetFloat(void * pVal) {
   else {
     tempVal -= 0.5f;
   }
-  return (ULONG)tempVal;
+  /*
+   * According to C standard, converting a float to integer is implementation
+   * defined when the number is out of integer bounds.
+   *
+   * To match original LEGO firmware, when casting float as integer, always
+   * convert to signed value, then cast as destination type.
+   */
+  return (ULONG)(SLONG)tempVal;
 }
 
 ULONG cCmdGetVal(void * pVal, TYPE_CODE TypeCode)
@@ -5648,20 +5663,21 @@ NXT_STATUS cCmdMove(DATA_ARG Arg1, DATA_ARG Arg2)
   }
   else if(tc2 == TC_FLOAT && tc1 <= TC_LAST_INT_SCALAR) { // float to int
     moveFloatInt++;
+    /*
+     * According to C standard, converting a float to integer is implementation
+     * defined when the number is out of integer bounds.
+     *
+     * To match original LEGO firmware, when casting float as integer, always
+     * convert to signed value, then cast as destination type.
+     */
     pArg1= VarsCmd.pDataspace + TOC1Ptr->DSOffset;
     pArg2= VarsCmd.pDataspace + TOC2Ptr->DSOffset;
-    if (tc1 == TC_SLONG)
-      *(SLONG*)pArg1 = *(float*)pArg2;
-    else if (tc1 == TC_ULONG)
-      *(ULONG*)pArg1 = *(float*)pArg2;
-    else if (tc1 == TC_SBYTE)
-      *(SBYTE*)pArg1 = *(float*)pArg2;
-    else if (tc1 == TC_UBYTE)
-      *(UBYTE*)pArg1 = *(float*)pArg2;
-    else if (tc1 == TC_UWORD)
-      *(UWORD*)pArg1 = *(float*)pArg2;
+    if (tc1 == TC_SLONG || tc1 == TC_ULONG)
+      *(SLONG*)pArg1 = (SLONG)*(float*)pArg2;
+    else if (tc1 == TC_SBYTE || tc1 == TC_UBYTE)
+      *(SBYTE*)pArg1 = (SLONG)*(float*)pArg2;
     else
-      *(SWORD*)pArg1 = *(float*)pArg2;
+      *(SWORD*)pArg1 = (SLONG)*(float*)pArg2;
     Status= NO_ERR;
   }
   //!!! Optimized move for arrays of ints.
