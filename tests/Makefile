@@ -8,6 +8,8 @@ TESTS = float
 
 tests: $(TESTS:%=%.diff)
 
+build: $(TESTS:%=%.rxe)
+
 %.rxe: %.nxc
 	$(NBC) $(OPTIMIZE) $(FIRMWARE) -O=$@ $<
 

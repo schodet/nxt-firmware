@@ -4,6 +4,7 @@ packages:
   - picolibc-arm-none-eabi
   - wget
   - unzip
+  - nbc
 sources:
   - https://git.sr.ht/~ni/nxt-firmware
 environment:
@@ -35,3 +36,6 @@ tasks:
         make; \
         make clean; \
       fi
+  - build-tests: |
+      cd nxt-firmware
+      make -C tests build
