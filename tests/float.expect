@@ -1,0 +1,56 @@
+move   -12.9
+ char  -12 244
+ short -12 65524
+ long  -12 4294967284
+move   -12.34
+ char  -12 244
+ short -12 65524
+ long  -12 4294967284
+move   12.34
+ char  12 12
+ short 12 12
+ long  12 12
+move   12.9
+ char  12 12
+ short 12 12
+ long  12 12
+move[] -12.9
+ char  -12 244
+ short -12 65524
+ long  -12 4294967284
+move[] -12.34
+ char  -12 244
+ short -12 65524
+ long  -12 4294967284
+move[] 12.34
+ char  12 12
+ short 12 12
+ long  12 12
+move[] 12.9
+ char  12 12
+ short 12 12
+ long  12 12
+neg    -12.9
+ char  12 12
+ short 12 12
+ long  12 12
+neg    -12.34
+ char  12 12
+ short 12 12
+ long  12 12
+neg    12.34
+ char  -12 244
+ short -12 65524
+ long  -12 4294967284
+neg    12.9
+ char  -12 244
+ short -12 65524
+ long  -12 4294967284
+out    -12.9
+ char  -13 243
+out    -12.34
+ char  -12 244
+out    12.34
+ char  12 12
+out    12.9
+ char  13 13

@@ -12,6 +12,7 @@ Details:
 - startup/*: see header (provided "as is").
 - armdebug/*: see armdebug/README (dual, LEGO Open Source License or GPLv2).
 - contrib/*: see header.
+- tests/*: Expat license, see header.
 
 LEGO(R) is a trademark of the LEGO Group of companies which does not sponsor,
 authorize or endorse NXT Improved Firmware.

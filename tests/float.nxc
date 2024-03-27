@@ -1,0 +1,141 @@
+/*
+ * Copyright (C) 2024 Nicolas Schodet
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+
+/*
+ * Convert floating point values to integer, check conversion is right.
+ *
+ * Actual check is done on the attached computer, see float.expect.
+ *
+ * When converting a float to an integer, if the integer is not able to
+ * represent the value, the behavior is implementation defined.
+ *
+ * The original firmware source code depends on this implementation defined
+ * behavior from the C compiler.
+ *
+ * The LEGO MINDSTORMS NXT Executable File Specification does not define what
+ * is the expected behavior for the firmware because it was released for
+ * version 1.03, before float was supported. However it says: "At the scalar
+ * level, data type conversions behave identically to type casts in ANSI C.".
+ *
+ * For NXT Improved firmware, I decided to follow the behavior of the original
+ * firmware binary, which is:
+ *
+ *  - Negative values to unsigned numbers: large positive integer (two's
+ *  complement).
+ *  - Round to nearest for SETOUT instruction, truncate for other operations.
+ *
+ * There are so many code paths inside the firmware to do the same thing that
+ * I may have missed some other cases. If you find such cases, please update
+ * this test.
+ */
+
+#include "term.h"
+
+task main()
+{
+    float a[4] = {-12.9, -12.34, 12.34, 12.9};
+    int i;
+
+    Wait(1000);
+
+    /*
+     * Test conversion using MOV instruction.
+     */
+    for (i = 0; i < 4; i++) {
+        float af = a[i];
+        char ac = af;
+        unsigned char auc = af;
+        short as = af;
+        unsigned short aus = af;
+        long al = af;
+        unsigned long aul = af;
+
+        TermText("move   "); TermNumNl(af);
+        TermText(" char  "); TermNum(ac); TermText(" "); TermNumNl(auc);
+        TermText(" short "); TermNum(as); TermText(" "); TermNumNl(aus);
+        TermText(" long  "); TermNum(al); TermText(" "); TermNumNl(aul);
+
+        Wait(100);
+    }
+
+    /*
+     * Test conversion using MOV instruction with an array.
+     */
+    while (1) {
+        char ac[4];
+        ac = a;
+        unsigned char auc[4];
+        auc = a;
+        short as[4];
+        as = a;
+        unsigned short aus[4];
+        aus = a;
+        long al[4];
+        al = a;
+        unsigned long aul[4];
+        aul = a;
+        for (i = 0; i < 4; i++) {
+            TermText("move[] "); TermNumNl(a[i]);
+            TermText(" char  "); TermNum(ac[i]); TermText(" "); TermNumNl(auc[i]);
+            TermText(" short "); TermNum(as[i]); TermText(" "); TermNumNl(aus[i]);
+            TermText(" long  "); TermNum(al[i]); TermText(" "); TermNumNl(aul[i]);
+
+            Wait(100);
+        }
+        break;
+    }
+
+    /*
+     * Test conversion using NEG instruction.
+     */
+    for (i = 0; i < 4; i++) {
+        float af = a[i];
+        char ac = -af;
+        unsigned char auc = -af;
+        short as = -af;
+        unsigned short aus = -af;
+        long al = -af;
+        unsigned long aul = -af;
+
+        TermText("neg    "); TermNumNl(af);
+        TermText(" char  "); TermNum(ac); TermText(" "); TermNumNl(auc);
+        TermText(" short "); TermNum(as); TermText(" "); TermNumNl(aus);
+        TermText(" long  "); TermNum(al); TermText(" "); TermNumNl(aul);
+
+        Wait(100);
+    }
+
+    /*
+     * Test conversion using SETOUT/GETOUT instructions.
+     */
+    for (i = 0; i < 4; i++) {
+        float af = a[i];
+        SetOutput(OUT_A, PowerField, af, RegPValueField, af);
+        char ac = GetOutput(OUT_A, PowerField);
+        unsigned char auc = GetOutput(OUT_A, RegPValueField);
+
+        TermText("out    "); TermNumNl(af);
+        TermText(" char  "); TermNum(ac); TermText(" "); TermNumNl(auc);
+
+        Wait(100);
+    }
+}
