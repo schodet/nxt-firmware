@@ -491,21 +491,21 @@ NXT_STATUS cCmdWrapDrawPicture(UBYTE * ArgV[])
       {
         case IMG_SPRITE_ID:
         {
-          if (OpSize >= sizeof(IMG_OP_SPRITE))
+          if (OpSize >= (SLONG)sizeof(IMG_OP_SPRITE))
             cCmdSetIMGData(pImage->Sprite.DataAddr, pImage);
         }
         break;
 
         case IMG_VARMAP_ID:
         {
-          if (OpSize >= sizeof(IMG_OP_VARMAP))
+          if (OpSize >= (SLONG)sizeof(IMG_OP_VARMAP))
             cCmdSetIMGData(pImage->VarMap.DataAddr, pImage);
         }
         break;
 
         case IMG_COPYBITS_ID:
         {
-          if (OpSize >= sizeof(IMG_OP_COPYBITS))
+          if (OpSize >= (SLONG)sizeof(IMG_OP_COPYBITS))
           {
             IMG_OP_COPYBITS * pCB = &(pImage->CopyBits);
             cCmdCopyBitMapBits(
@@ -522,7 +522,7 @@ NXT_STATUS cCmdWrapDrawPicture(UBYTE * ArgV[])
 
         case IMG_LINE_ID:
         {
-          if (OpSize >= sizeof(IMG_OP_LINE))
+          if (OpSize >= (SLONG)sizeof(IMG_OP_LINE))
           {
             IMG_OP_LINE * pL = &(pImage->Line);
             cCmdDrawLine(
@@ -537,7 +537,7 @@ NXT_STATUS cCmdWrapDrawPicture(UBYTE * ArgV[])
 
         case IMG_RECTANGLE_ID:
         {
-          if (OpSize >= sizeof(IMG_OP_LINE))
+          if (OpSize >= (SLONG)sizeof(IMG_OP_LINE))
           {
             IMG_OP_RECT * pL = &(pImage->Rect);
             cCmdDrawRect(
@@ -552,7 +552,7 @@ NXT_STATUS cCmdWrapDrawPicture(UBYTE * ArgV[])
 
         case IMG_PIXEL_ID:
         {
-          if (OpSize >= sizeof(IMG_OP_PIXEL))
+          if (OpSize >= (SLONG)sizeof(IMG_OP_PIXEL))
           {
             cCmdSetPixel(
               (cCmdResolveValue(pImage->Pixel.Pt.X) + Pt.X),
@@ -564,7 +564,7 @@ NXT_STATUS cCmdWrapDrawPicture(UBYTE * ArgV[])
 
         case IMG_NUMBOX_ID:
         {
-          if (OpSize >= sizeof(IMG_OP_NUMBOX))
+          if (OpSize >= (SLONG)sizeof(IMG_OP_NUMBOX))
           {
             UBYTE NumStr[20];
             IMG_OP_NUMBOX * pNB = &(pImage->NumBox);

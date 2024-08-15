@@ -3519,6 +3519,7 @@ UWORD     cCommReq(UBYTE Cmd, UBYTE Param1, UBYTE Param2, UBYTE Param3, UBYTE *p
         foundIndex= cCommSearchBTDevTableForName(pName);
         if(foundIndex != -1)
           Param1= foundIndex;
+        /* fall through */
       case CONNECT:
       {
 

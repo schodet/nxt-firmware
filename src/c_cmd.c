@@ -2230,7 +2230,7 @@ NXT_STATUS cCmdAcquireMutex(MUTEX_Q * Mutex)
 
 NXT_STATUS cCmdReleaseMutex(MUTEX_Q * Mutex)
 {
-#if WIN_DEBUG || defined(ARM_DEBUG)
+#if defined(WIN_DEBUG) || defined(ARM_DEBUG)
   CLUMP_ID Clump= VarsCmd.RunQ.Head;
 #endif
   NXT_ASSERT(Mutex != NULL);
@@ -2500,7 +2500,7 @@ NXT_STATUS cCmdDVArrayAlloc(DV_INDEX DVIndex, UWORD NewCount)
     if(OldCount)
       memmove(pData, VarsCmd.pDataspace + DV_ARRAY[DVIndex].Offset, (UWORD)(DV_ARRAY[DVIndex].ElemSize * OldCount));
     //!!! Clear mem so old mem doesn't contain stale data. Not strictly needed.
-#if WIN_DEBUG || defined(ARM_DEBUG)
+#if defined(WIN_DEBUG) || defined(ARM_DEBUG)
     memset(VarsCmd.pDataspace + DV_ARRAY[DVIndex].Offset, 0xFF, (UWORD)(DV_ARRAY[DVIndex].ElemSize * OldCount));
 #endif
     //Update dope vector
@@ -7921,7 +7921,7 @@ void cCmdLoadCalibrationFiles(void) {
   gCalibCacheCnt= 0;
   gCalibCacheArrayDVIdx= NOT_A_DS_ID;
   // file I/O to load all .cal files into cached globals used by scaling syscall
-  HandleSearch = pMapLoader->pFunc(FINDFIRST, "*.cal", nm, &cnt); // returns total files and nm of first one
+  HandleSearch = pMapLoader->pFunc(FINDFIRST, (UBYTE *)"*.cal", nm, &cnt); // returns total files and nm of first one
   while (LOADER_ERR(HandleSearch) == SUCCESS) { // if we have a file, process it by closing and opening
     SWORD min= 0, max= 0, tmp;
     ULONG length;

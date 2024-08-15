@@ -46,8 +46,6 @@
 #define   BT_MISO_OUT       AT91C_PIO_PA6
 #define   BT_MISO_IN        AT91C_PIO_PA12
 
-#pragma optimize=s 9
-
 __ramfunc void SpiBtIo(void)
 {
   register ULONG Port;

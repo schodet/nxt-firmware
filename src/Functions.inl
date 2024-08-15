@@ -274,11 +274,11 @@ void      cUiUpdateSensor(SWORD Time)
           {
             if (VarsUi.SensorReset == TRUE)
             {
-              cUiWriteLowspeed(Port,3,"\x02\x41\x02",0);
+              cUiWriteLowspeed(Port,3,(UBYTE *)"\x02\x41\x02",0);
             }
             if (VarsUi.SensorState == SENSOR_ACQUIRE)
             {
-              cUiWriteLowspeed(Port,2,"\x02\x42",1);
+              cUiWriteLowspeed(Port,2,(UBYTE *)"\x02\x42",1);
             }
             if (VarsUi.SensorState == SENSOR_READ)
             {
@@ -307,11 +307,11 @@ void      cUiUpdateSensor(SWORD Time)
             {
               if (VarsUi.SensorState == SENSOR_SETUP)
               {
-                cUiWriteLowspeed(Port,3,"\x98\x01\x60",0);
+                cUiWriteLowspeed(Port,3,(UBYTE *)"\x98\x01\x60",0);
               }
               if (VarsUi.SensorState == SENSOR_ACQUIRE)
               {
-                cUiWriteLowspeed(Port,2,"\x98\x00",2);
+                cUiWriteLowspeed(Port,2,(UBYTE *)"\x98\x00",2);
               }
               if (VarsUi.SensorState == SENSOR_READ)
               {
@@ -3516,7 +3516,7 @@ UBYTE     cUiBtConnectList(UBYTE Action) // Show connections and maybe disconnec
     case MENU_UPDATE : // Check connection valid
     {
       VarsUi.Tmp = VarsUi.SlotCenter - 1;
-      if (cUiBTCommand(UI_BT_GET_CONNECTION_VALID,NULL,&VarsUi.Tmp,NULL) != UI_BT_SUCCES)
+      if (cUiBTCommand(UI_BT_GET_CONNECTION_VALID,0,&VarsUi.Tmp,NULL) != UI_BT_SUCCES)
       {
         Action = MENU_EXIT;
       }
@@ -3583,9 +3583,9 @@ UBYTE     cUiBtConnectList(UBYTE Action) // Show connections and maybe disconnec
     pMapDisplay->pBitmaps[BITMAP_4]          = (BMPMAP*)VarsUi.PortBitmapRight;
 
     VarsUi.Tmp = VarsUi.SlotLeft - 1;
-    if (cUiBTCommand(UI_BT_GET_CONNECTION_VALID,NULL,&VarsUi.Tmp,NULL) == UI_BT_SUCCES)
+    if (cUiBTCommand(UI_BT_GET_CONNECTION_VALID,0,&VarsUi.Tmp,NULL) == UI_BT_SUCCES)
     {
-      cUiBTCommand(UI_BT_GET_CONNECTION_TYPE,NULL,&VarsUi.Tmp,&VarsUi.DeviceType);
+      cUiBTCommand(UI_BT_GET_CONNECTION_TYPE,0,&VarsUi.Tmp,&VarsUi.DeviceType);
       pMapDisplay->pMenuIcons[MENUICON_LEFT]    = (UBYTE*)&Devices.Data[VarsUi.DeviceType * Devices.ItemPixelsX * (Devices.ItemPixelsY / 8)];
       cUiDrawPortNo(VarsUi.PortBitmapLeft,MENUICON_LEFT,VarsUi.Tmp);
       pMapDisplay->UpdateMask                  |= BITMAP_BIT(BITMAP_2);
@@ -3596,13 +3596,13 @@ UBYTE     cUiBtConnectList(UBYTE Action) // Show connections and maybe disconnec
     }
 
     VarsUi.Tmp = VarsUi.SlotCenter - 1;
-    cUiBTCommand(UI_BT_GET_CONNECTION_NAME,NULL,&VarsUi.Tmp,VarsUi.DisplayBuffer);
+    cUiBTCommand(UI_BT_GET_CONNECTION_NAME,0,&VarsUi.Tmp,VarsUi.DisplayBuffer);
     pMapDisplay->EraseMask                     |=  TEXTLINE_BIT(TEXTLINE_5);
     pMapDisplay->pMenuText                      = VarsUi.DisplayBuffer;
 
-    if (cUiBTCommand(UI_BT_GET_CONNECTION_VALID,NULL,&VarsUi.Tmp,NULL) == UI_BT_SUCCES)
+    if (cUiBTCommand(UI_BT_GET_CONNECTION_VALID,0,&VarsUi.Tmp,NULL) == UI_BT_SUCCES)
     {
-      cUiBTCommand(UI_BT_GET_CONNECTION_TYPE,NULL,&VarsUi.Tmp,&VarsUi.DeviceType);
+      cUiBTCommand(UI_BT_GET_CONNECTION_TYPE,0,&VarsUi.Tmp,&VarsUi.DeviceType);
       pMapDisplay->pMenuIcons[MENUICON_CENTER]  = (UBYTE*)&Devices.Data[VarsUi.DeviceType * Devices.ItemPixelsX * (Devices.ItemPixelsY / 8)];
       cUiDrawPortNo(VarsUi.PortBitmapCenter,MENUICON_CENTER,VarsUi.Tmp);
       pMapDisplay->UpdateMask                  |= BITMAP_BIT(BITMAP_3);
@@ -3612,9 +3612,9 @@ UBYTE     cUiBtConnectList(UBYTE Action) // Show connections and maybe disconnec
       pMapDisplay->pMenuIcons[MENUICON_CENTER]  = (UBYTE*)&Connections.Data[VarsUi.Tmp * Connections.ItemPixelsX * (Connections.ItemPixelsY / 8)];
     }
     VarsUi.Tmp = VarsUi.SlotRight - 1;
-    if (cUiBTCommand(UI_BT_GET_CONNECTION_VALID,NULL,&VarsUi.Tmp,NULL) == UI_BT_SUCCES)
+    if (cUiBTCommand(UI_BT_GET_CONNECTION_VALID,0,&VarsUi.Tmp,NULL) == UI_BT_SUCCES)
     {
-      cUiBTCommand(UI_BT_GET_CONNECTION_TYPE,NULL,&VarsUi.Tmp,&VarsUi.DeviceType);
+      cUiBTCommand(UI_BT_GET_CONNECTION_TYPE,0,&VarsUi.Tmp,&VarsUi.DeviceType);
       pMapDisplay->pMenuIcons[MENUICON_RIGHT]   = (UBYTE*)&Devices.Data[VarsUi.DeviceType * Devices.ItemPixelsX * (Devices.ItemPixelsY / 8)];
       cUiDrawPortNo(VarsUi.PortBitmapRight,MENUICON_RIGHT,VarsUi.Tmp);
       pMapDisplay->UpdateMask                  |= BITMAP_BIT(BITMAP_4);
@@ -3811,7 +3811,7 @@ UBYTE     cUiBtConnect(UBYTE Action) // Select connection no and insert device
         case 0 : // Check connection
         {
           VarsUi.SelectedSlot = (UBYTE)VarsUi.SlotCenter;
-          if (VarsUi.SelectedFilename[0] && (cUiBTCommand(UI_BT_GET_CONNECTION_NAME,NULL,&VarsUi.SelectedSlot,NULL) == UI_BT_SUCCES))
+          if (VarsUi.SelectedFilename[0] && (cUiBTCommand(UI_BT_GET_CONNECTION_NAME,0,&VarsUi.SelectedSlot,NULL) == UI_BT_SUCCES))
           {
             VarsUi.State += 2;
           }
@@ -3900,9 +3900,9 @@ UBYTE     cUiBtConnect(UBYTE Action) // Select connection no and insert device
     pMapDisplay->pBitmaps[BITMAP_4]          = (BMPMAP*)VarsUi.PortBitmapRight;
 
     VarsUi.Tmp = VarsUi.SlotLeft;
-    if (cUiBTCommand(UI_BT_GET_CONNECTION_VALID,NULL,&VarsUi.Tmp,NULL) == UI_BT_SUCCES)
+    if (cUiBTCommand(UI_BT_GET_CONNECTION_VALID,0,&VarsUi.Tmp,NULL) == UI_BT_SUCCES)
     {
-      cUiBTCommand(UI_BT_GET_CONNECTION_TYPE,NULL,&VarsUi.Tmp,&VarsUi.DeviceType);
+      cUiBTCommand(UI_BT_GET_CONNECTION_TYPE,0,&VarsUi.Tmp,&VarsUi.DeviceType);
       pMapDisplay->pMenuIcons[MENUICON_LEFT]    = (UBYTE*)&Devices.Data[VarsUi.DeviceType * Devices.ItemPixelsX * (Devices.ItemPixelsY / 8)];
       cUiDrawPortNo(VarsUi.PortBitmapLeft,MENUICON_LEFT,VarsUi.Tmp);
       pMapDisplay->UpdateMask                  |= BITMAP_BIT(BITMAP_2);
@@ -3913,13 +3913,13 @@ UBYTE     cUiBtConnect(UBYTE Action) // Select connection no and insert device
     }
 
     VarsUi.Tmp = VarsUi.SlotCenter;
-    cUiBTCommand(UI_BT_GET_CONNECTION_NAME,NULL,&VarsUi.Tmp,VarsUi.DisplayBuffer);
+    cUiBTCommand(UI_BT_GET_CONNECTION_NAME,0,&VarsUi.Tmp,VarsUi.DisplayBuffer);
     pMapDisplay->EraseMask                     |=  TEXTLINE_BIT(TEXTLINE_5);
     pMapDisplay->pMenuText                      = VarsUi.DisplayBuffer;
 
-    if (cUiBTCommand(UI_BT_GET_CONNECTION_VALID,NULL,&VarsUi.Tmp,NULL) == UI_BT_SUCCES)
+    if (cUiBTCommand(UI_BT_GET_CONNECTION_VALID,0,&VarsUi.Tmp,NULL) == UI_BT_SUCCES)
     {
-      cUiBTCommand(UI_BT_GET_CONNECTION_TYPE,NULL,&VarsUi.Tmp,&VarsUi.DeviceType);
+      cUiBTCommand(UI_BT_GET_CONNECTION_TYPE,0,&VarsUi.Tmp,&VarsUi.DeviceType);
       pMapDisplay->pMenuIcons[MENUICON_CENTER]  = (UBYTE*)&Devices.Data[VarsUi.DeviceType * Devices.ItemPixelsX * (Devices.ItemPixelsY / 8)];
       cUiDrawPortNo(VarsUi.PortBitmapCenter,MENUICON_CENTER,VarsUi.Tmp);
       pMapDisplay->UpdateMask                  |= BITMAP_BIT(BITMAP_3);
@@ -3929,9 +3929,9 @@ UBYTE     cUiBtConnect(UBYTE Action) // Select connection no and insert device
       pMapDisplay->pMenuIcons[MENUICON_CENTER]  = (UBYTE*)&Connections.Data[VarsUi.Tmp * Connections.ItemPixelsX * (Connections.ItemPixelsY / 8)];
     }
     VarsUi.Tmp = VarsUi.SlotRight;
-    if (cUiBTCommand(UI_BT_GET_CONNECTION_VALID,NULL,&VarsUi.Tmp,NULL) == UI_BT_SUCCES)
+    if (cUiBTCommand(UI_BT_GET_CONNECTION_VALID,0,&VarsUi.Tmp,NULL) == UI_BT_SUCCES)
     {
-      cUiBTCommand(UI_BT_GET_CONNECTION_TYPE,NULL,&VarsUi.Tmp,&VarsUi.DeviceType);
+      cUiBTCommand(UI_BT_GET_CONNECTION_TYPE,0,&VarsUi.Tmp,&VarsUi.DeviceType);
       pMapDisplay->pMenuIcons[MENUICON_RIGHT]   = (UBYTE*)&Devices.Data[VarsUi.DeviceType * Devices.ItemPixelsX * (Devices.ItemPixelsY / 8)];
       cUiDrawPortNo(VarsUi.PortBitmapRight,MENUICON_RIGHT,VarsUi.Tmp);
       pMapDisplay->UpdateMask                  |= BITMAP_BIT(BITMAP_4);

@@ -15,7 +15,7 @@
 #include "debug_stub.h"
 #endif
 
-void main(void)
+int main(void)
 {
   while(TRUE)
   {

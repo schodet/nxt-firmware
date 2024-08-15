@@ -200,7 +200,7 @@ static    ULONG ColorTimer[NO_OF_INPUTS];
 
 #define   CALDataRead(Port, pData)      {\
                                           UBYTE BitCnt;                               \
-                                          UBYTE Data;                                 \
+                                          UBYTE Data = 0;                             \
                                           BitCnt = 0;                                 \
                                           INPUTClkHigh(Port);                         \
                                           rInputWait2uS();                            \

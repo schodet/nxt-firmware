@@ -557,7 +557,7 @@ UBYTE     cUiMenuSearchSensorIcon(UBYTE Sensor)
   MENUITEM *MenuItem;
   UBYTE    Index;
 
-  for (Index = 0;(Index < IOMapUi.pMenu->Items) && (Result == NULL);Index++)
+  for (Index = 0;(Index < IOMapUi.pMenu->Items) && (Result == 0);Index++)
   {
     MenuItem = &IOMapUi.pMenu->Data[Index];
     if (MenuItem->FunctionParameter == Sensor)

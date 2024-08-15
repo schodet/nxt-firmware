@@ -51,7 +51,7 @@ void AT91F_LowLevelInit( void) SECTION_ICODE
   // 1 Enabling the Main Oscillator:
   // SCK = 1/32768 = 30.51 uSecond
   // Start up time = 8 * 6 / SCK = 56 * 30.51 = 1,46484375 ms
-  pPMC->PMC_MOR = (( AT91C_CKGR_OSCOUNT & (0x06 <<8) | AT91C_CKGR_MOSCEN ));
+  pPMC->PMC_MOR = (( (AT91C_CKGR_OSCOUNT & (0x06 <<8)) | AT91C_CKGR_MOSCEN ));
 
   // Wait the startup time
   while(!(pPMC->PMC_SR & AT91C_PMC_MOSCS));

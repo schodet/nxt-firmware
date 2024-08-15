@@ -799,7 +799,7 @@ ULONG     dLoaderReturnFreeFlash(void)
 ULONG     dLoaderCalcFreeFileSpace(UWORD NosOfFreeSectors)
 {
   UWORD   SectorCnt;
-  ULONG   Space;
+  ULONG   Space = 0;
   ULONG   HeaderSpace;
 
   /* Calculate only if any sectors available */

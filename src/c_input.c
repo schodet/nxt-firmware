@@ -1126,13 +1126,13 @@ SWORD     cInputTempConv(UWORD InputVal)
     2573629857807ll, -822478326197838ll, 195856762719738784ll };
   const unsigned int TempCoeffShift = 48;
   /* Replace the original table with polynomial. */
-  int i;
+  unsigned i;
   long long Input = InputVal;
   long long Output = TempCoeff[0];
   for (i = 1; i < sizeof TempCoeff / sizeof TempCoeff[0]; i++)
     Output = Output * Input + TempCoeff[i];
   /* Round. */
-  return Output + (1ll << TempCoeffShift - 1) >> TempCoeffShift;
+  return (Output + (1ll << (TempCoeffShift - 1))) >> TempCoeffShift;
 }
 
 
