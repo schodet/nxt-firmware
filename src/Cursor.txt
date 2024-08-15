@@ -1,5 +1,5 @@
-#define sizeof_Cursor 15
-DEFINE_DATA(BMPMAP, Cursor) = 
+#define Cursor_size 15
+const BMPMAP Cursor =
 {
   0x02,0x00, // Graphics Format
   0x00,0x08, // Graphics DataSize
@@ -7,7 +7,7 @@ DEFINE_DATA(BMPMAP, Cursor) =
   0x00,      // Graphics Start Y
   0x07,      // Graphics Width
   0x08,      // Graphics Height
-BEGIN_DATA
+  {
   0x21,0x31,0x39,0x3D,0x39,0x31,0x21
-END_DATA
+  }
 };
