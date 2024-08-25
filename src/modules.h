@@ -242,20 +242,6 @@ typedef   struct
 {
   UBYTE   FormatMsb;
   UBYTE   FormatLsb;
-  UBYTE   DataBytesMsb;
-  UBYTE   DataBytesLsb;
-  UBYTE   ItemsX;
-  UBYTE   ItemsY;
-  UBYTE   ItemCharsX;
-  UBYTE   ItemCharsY;
-  UBYTE   Data[];
-}
-TXT;
-
-typedef   struct
-{
-  UBYTE   FormatMsb;
-  UBYTE   FormatLsb;
   UBYTE   DateBytesMsb;
   UBYTE   DataBytesLsb;
   UBYTE   TonesMsb;

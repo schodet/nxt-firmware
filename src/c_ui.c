@@ -163,7 +163,7 @@ enum STATUS_NO                          // Index in status icon collection file
 
 // ****** FREE TEXT GRAPHIC RESOURCES ****************************************
 
-#include  "Ui.txt"            // Text strings that is'nt defined in menu files
+#include  "Ui_txt.h"          // Text strings that isn't defined in menu files
 
 enum                          // String index in text string file
 {
@@ -368,17 +368,12 @@ UBYTE*    cUiGetMenuPointer(UBYTE FileNo)
 UBYTE*    cUiGetString(UBYTE No)        // Get string in text string file
 {
   UBYTE   *Result = NULL;
-  TXT     *pUi;
-  UWORD   Tmp;
 
-  pUi = (TXT*)&Ui;
   if (No)
   {
-    if (No <= pUi->ItemsY)
+    if (No <= sizeof(Ui) / sizeof(Ui[0]))
     {
-      Tmp  = No - 1;
-      Tmp *= pUi->ItemCharsX;
-      Result = &(pUi->Data[Tmp]);
+      Result = (UBYTE *) Ui[No - 1];
     }
   }
 
