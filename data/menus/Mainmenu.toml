@@ -1,0 +1,115 @@
+format = "menu"
+item_pixels_x = 24
+item_pixels_y = 24
+
+[[items]]
+item_id = 1
+function_index = 2
+function_parameter = 0
+file_load_no = 0
+next_menu = 1
+icon_text = "Turn off?"
+icon_image_no = 49
+
+[items.flags]
+skip_this_mother_id = 1
+enter_only_calls = true
+exit_load_menu = true
+
+[[items]]
+item_id = 2
+function_index = 0
+function_parameter = 0
+file_load_no = 0
+next_menu = 1
+icon_text = "Turn off?"
+icon_image_no = 48
+
+[items.flags]
+skip_this_mother_id = 1
+exit_load_menu = true
+
+[[items]]
+item_id = 17
+function_index = 0
+function_parameter = 0
+file_load_no = 1
+next_menu = 1
+icon_text = "My Files"
+icon_image_no = 59
+
+[items.flags]
+exit_load_pointer = 1
+
+[[items]]
+item_id = 33
+function_index = 0
+function_parameter = 0
+file_load_no = 2
+next_menu = 1
+icon_text = "NXT Program"
+icon_image_no = 60
+
+[items.flags]
+exit_load_pointer = 1
+
+[[items]]
+item_id = 49
+function_index = 10
+function_parameter = 0
+file_load_no = 3
+next_menu = 1
+icon_text = "NXT Datalog"
+icon_image_no = 61
+
+[items.flags]
+exit_load_pointer = 1
+only_datalog_enabled = true
+
+[[items]]
+item_id = 65
+function_index = 14
+function_parameter = 0
+file_load_no = 4
+next_menu = 1
+icon_text = "View"
+icon_image_no = 62
+
+[items.flags]
+exit_load_pointer = 1
+
+[[items]]
+item_id = 81
+function_index = 0
+function_parameter = 0
+file_load_no = 7
+next_menu = 2
+icon_text = "Bluetooth"
+icon_image_no = 81
+
+[items.flags]
+exit_load_pointer = 1
+
+[[items]]
+item_id = 97
+function_index = 0
+function_parameter = 0
+file_load_no = 5
+next_menu = 1
+icon_text = "Settings"
+icon_image_no = 63
+
+[items.flags]
+exit_load_pointer = 1
+
+[[items]]
+item_id = 113
+function_index = 0
+function_parameter = 0
+file_load_no = 6
+next_menu = 1
+icon_text = "Try Me"
+icon_image_no = 64
+
+[items.flags]
+exit_load_pointer = 1

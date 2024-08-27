@@ -1,0 +1,783 @@
+format = "menu"
+item_pixels_x = 24
+item_pixels_y = 24
+
+[[items]]
+item_id = 1
+function_index = 11
+function_parameter = 247
+file_load_no = 0
+next_menu = 1
+icon_text = " "
+icon_image_no = 0
+
+[items.flags]
+init_calls_with_0 = true
+left_right_as_call = true
+
+[[items]]
+item_id = 17
+function_index = 11
+function_parameter = 35
+file_load_no = 0
+next_menu = 1
+icon_text = "Forward 5"
+icon_image_no = 35
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 33
+function_index = 11
+function_parameter = 34
+file_load_no = 0
+next_menu = 1
+icon_text = "Forward"
+icon_image_no = 34
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 49
+function_index = 11
+function_parameter = 41
+file_load_no = 0
+next_menu = 1
+icon_text = "Turn right 2"
+icon_image_no = 41
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 65
+function_index = 11
+function_parameter = 40
+file_load_no = 0
+next_menu = 1
+icon_text = "Turn right"
+icon_image_no = 40
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 81
+function_index = 11
+function_parameter = 47
+file_load_no = 0
+next_menu = 1
+icon_text = "Back right 2"
+icon_image_no = 47
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 97
+function_index = 11
+function_parameter = 39
+file_load_no = 0
+next_menu = 1
+icon_text = "Back right"
+icon_image_no = 39
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 113
+function_index = 11
+function_parameter = 43
+file_load_no = 0
+next_menu = 1
+icon_text = "Tone 1"
+icon_image_no = 43
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 129
+function_index = 11
+function_parameter = 44
+file_load_no = 0
+next_menu = 1
+icon_text = "Tone 2"
+icon_image_no = 44
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 145
+function_index = 11
+function_parameter = 36
+file_load_no = 0
+next_menu = 1
+icon_text = "Back left 2"
+icon_image_no = 36
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 161
+function_index = 11
+function_parameter = 42
+file_load_no = 0
+next_menu = 1
+icon_text = "Back left"
+icon_image_no = 42
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 177
+function_index = 11
+function_parameter = 37
+file_load_no = 0
+next_menu = 1
+icon_text = "Turn left"
+icon_image_no = 37
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 193
+function_index = 11
+function_parameter = 38
+file_load_no = 0
+next_menu = 1
+icon_text = "Turn left 2"
+icon_image_no = 38
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 209
+function_index = 11
+function_parameter = 33
+file_load_no = 0
+next_menu = 1
+icon_text = "Empty"
+icon_image_no = 33
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 225
+function_index = 11
+function_parameter = 45
+file_load_no = 0
+next_menu = 1
+icon_text = "Backward"
+icon_image_no = 45
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 241
+function_index = 11
+function_parameter = 46
+file_load_no = 0
+next_menu = 1
+icon_text = "Backward 5"
+icon_image_no = 46
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 273
+function_index = 11
+function_parameter = 65
+file_load_no = 0
+next_menu = 1
+icon_text = "Empty"
+icon_image_no = 33
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 529
+function_index = 11
+function_parameter = 70
+file_load_no = 0
+next_menu = 1
+icon_text = "Wait 2"
+icon_image_no = 70
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 785
+function_index = 11
+function_parameter = 71
+file_load_no = 0
+next_menu = 1
+icon_text = "Wait 5"
+icon_image_no = 71
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 1041
+function_index = 11
+function_parameter = 72
+file_load_no = 0
+next_menu = 1
+icon_text = "Wait 10"
+icon_image_no = 72
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 1297
+function_index = 11
+function_parameter = 67
+file_load_no = 0
+next_menu = 1
+icon_text = "Object"
+icon_image_no = 67
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 1553
+function_index = 11
+function_parameter = 68
+file_load_no = 0
+next_menu = 1
+icon_text = "Sound"
+icon_image_no = 68
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 1809
+function_index = 11
+function_parameter = 66
+file_load_no = 0
+next_menu = 1
+icon_text = "Light"
+icon_image_no = 66
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 2065
+function_index = 11
+function_parameter = 73
+file_load_no = 0
+next_menu = 1
+icon_text = "Dark"
+icon_image_no = 73
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 2321
+function_index = 11
+function_parameter = 69
+file_load_no = 0
+next_menu = 1
+icon_text = "Touch"
+icon_image_no = 69
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 4369
+function_index = 11
+function_parameter = 35
+file_load_no = 0
+next_menu = 1
+icon_text = "Forward 5"
+icon_image_no = 35
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 8465
+function_index = 11
+function_parameter = 34
+file_load_no = 0
+next_menu = 1
+icon_text = "Forward"
+icon_image_no = 34
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 12561
+function_index = 11
+function_parameter = 41
+file_load_no = 0
+next_menu = 1
+icon_text = "Turn right 2"
+icon_image_no = 41
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 16657
+function_index = 11
+function_parameter = 40
+file_load_no = 0
+next_menu = 1
+icon_text = "Turn right"
+icon_image_no = 40
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 20753
+function_index = 11
+function_parameter = 47
+file_load_no = 0
+next_menu = 1
+icon_text = "Back right 2"
+icon_image_no = 47
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 24849
+function_index = 11
+function_parameter = 39
+file_load_no = 0
+next_menu = 1
+icon_text = "Back right"
+icon_image_no = 39
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 28945
+function_index = 11
+function_parameter = 43
+file_load_no = 0
+next_menu = 1
+icon_text = "Tone 1"
+icon_image_no = 43
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 33041
+function_index = 11
+function_parameter = 44
+file_load_no = 0
+next_menu = 1
+icon_text = "Tone 2"
+icon_image_no = 44
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 37137
+function_index = 11
+function_parameter = 36
+file_load_no = 0
+next_menu = 1
+icon_text = "Back left 2"
+icon_image_no = 36
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 41233
+function_index = 11
+function_parameter = 42
+file_load_no = 0
+next_menu = 1
+icon_text = "Back left"
+icon_image_no = 42
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 45329
+function_index = 11
+function_parameter = 37
+file_load_no = 0
+next_menu = 1
+icon_text = "Turn left"
+icon_image_no = 37
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 49425
+function_index = 11
+function_parameter = 38
+file_load_no = 0
+next_menu = 1
+icon_text = "Turn left 2"
+icon_image_no = 38
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 53521
+function_index = 11
+function_parameter = 33
+file_load_no = 0
+next_menu = 1
+icon_text = "Empty"
+icon_image_no = 33
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 57617
+function_index = 11
+function_parameter = 45
+file_load_no = 0
+next_menu = 1
+icon_text = "Backward"
+icon_image_no = 45
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 61713
+function_index = 11
+function_parameter = 46
+file_load_no = 0
+next_menu = 1
+icon_text = "Backward 5"
+icon_image_no = 46
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 69905
+function_index = 11
+function_parameter = 65
+file_load_no = 0
+next_menu = 1
+icon_text = "Empty"
+icon_image_no = 33
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 135441
+function_index = 11
+function_parameter = 70
+file_load_no = 0
+next_menu = 1
+icon_text = "Wait 2"
+icon_image_no = 70
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 200977
+function_index = 11
+function_parameter = 71
+file_load_no = 0
+next_menu = 1
+icon_text = "Wait 5"
+icon_image_no = 71
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 266513
+function_index = 11
+function_parameter = 72
+file_load_no = 0
+next_menu = 1
+icon_text = "Wait 10"
+icon_image_no = 72
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 332049
+function_index = 11
+function_parameter = 67
+file_load_no = 0
+next_menu = 1
+icon_text = "Object"
+icon_image_no = 67
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 397585
+function_index = 11
+function_parameter = 68
+file_load_no = 0
+next_menu = 1
+icon_text = "Sound"
+icon_image_no = 68
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 463121
+function_index = 11
+function_parameter = 66
+file_load_no = 0
+next_menu = 1
+icon_text = "Light"
+icon_image_no = 66
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 528657
+function_index = 11
+function_parameter = 73
+file_load_no = 0
+next_menu = 1
+icon_text = "Dark"
+icon_image_no = 73
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 594193
+function_index = 11
+function_parameter = 69
+file_load_no = 0
+next_menu = 1
+icon_text = "Touch"
+icon_image_no = 69
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 1118481
+function_index = 11
+function_parameter = 251
+file_load_no = 0
+next_menu = 1
+icon_text = "Stop"
+icon_image_no = 77
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 2167057
+function_index = 11
+function_parameter = 252
+file_load_no = 0
+next_menu = 1
+icon_text = "Loop"
+icon_image_no = 78
+
+[items.flags]
+skip_this_mother_id = 1
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 17895697
+function_index = 11
+function_parameter = 248
+file_load_no = 0
+next_menu = 0
+icon_text = "Run"
+icon_image_no = 50
+
+[items.flags]
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 34672913
+function_index = 0
+function_parameter = 0
+file_load_no = 0
+next_menu = 0
+icon_text = "Main menu"
+icon_image_no = 55
+
+[items.flags]
+leave_background = true
+exit_calls_with_ff = true
+enter_leaves_menufile = true
+
+[[items]]
+item_id = 68227345
+function_index = 11
+function_parameter = 250
+file_load_no = 0
+next_menu = 2
+icon_text = "Save"
+icon_image_no = 29
+
+[items.flags]
+leave_background = true
+exit_calls_with_ff = true
+
+[[items]]
+item_id = 336662801
+function_index = 11
+function_parameter = 237
+file_load_no = 0
+next_menu = 0
+icon_text = "Yes"
+icon_image_no = 49
+
+[items.flags]
+leave_background = true
+enter_leaves_menufile = true
+
+[[items]]
+item_id = 605098257
+function_index = 11
+function_parameter = 246
+file_load_no = 0
+next_menu = 0
+icon_text = "No"
+icon_image_no = 48
+
+[items.flags]
+enter_act_as_exit = true
+leave_background = true
+exit_calls = true

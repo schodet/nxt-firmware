@@ -5,6 +5,7 @@ packages:
   - wget
   - unzip
   - nbc
+  - python3-pil
 sources:
   - https://git.sr.ht/~ni/nxt-firmware
 environment:

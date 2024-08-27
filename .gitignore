@@ -2,6 +2,7 @@
 *.lst
 *.sym
 *.elf
+/*.h
 tags
 version.mak
 nxt_firmware.bin

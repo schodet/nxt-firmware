@@ -4,6 +4,7 @@ LIBDIR = $(BASE)/lib
 DBGDIR = $(BASE)/armdebug/Debugger
 CPUINCDIR = $(BASE)/include
 STARTUPDIR = $(BASE)/startup
+TOOLSDIR = $(BASE)/tools
 
 DATE_FMT = +%Y-%m-%dT%H:%M
 ifndef SOURCE_DATE_EPOCH
@@ -31,12 +32,23 @@ THUMB_SOURCES = c_button.c c_cmd.c c_comm.c c_display.c c_input.c c_ioctrl.c \
 ASM_ARM_SOURCE = Cstartup.S
 ASM_THUMB_SOURCE =
 
+BITMAPS = Cursor Display Fail Info LowBattery Ok Wait \
+	  RCXintro_1 RCXintro_2 RCXintro_3 RCXintro_4 RCXintro_5 RCXintro_6 \
+	  RCXintro_7 RCXintro_8 RCXintro_9 RCXintro_10 RCXintro_11 \
+	  RCXintro_12 RCXintro_13 RCXintro_14 RCXintro_15 RCXintro_16 \
+	  Test1 Test2
+
+ICONS = Connections Devices Font Icons Port Running Status Step
+
+MENUS = Mainmenu \
+	Submenu01 Submenu02 Submenu03 Submenu04 Submenu05 Submenu06 Submenu07
+
 vpath %.c $(SRCDIR)
 vpath %.c $(LIBDIR)
 vpath %.c $(STARTUPDIR)
 vpath %.S $(STARTUPDIR)
 
-INCLUDES = -I$(CPUINCDIR)
+INCLUDES = -I$(BASE) -I$(CPUINCDIR)
 
 MCU = arm7tdmi
 STARTOFUSERFLASH_DEFINES = -DSTARTOFUSERFLASH_FROM_LINKER=1
@@ -77,6 +89,10 @@ ARM_OBJECTS = $(ARM_SOURCES:%.c=%.o) $(ASM_ARM_SOURCE:%.S=%.o)
 THUMB_OBJECTS = $(THUMB_SOURCES:%.c=%.o) $(THUMB_ARM_SOURCE:%.S=%.o)
 OBJECTS = $(ARM_OBJECTS) $(THUMB_OBJECTS)
 
+BITMAPS_SOURCES = $(BITMAPS:%=%.h)
+ICONS_SOURCES = $(ICONS:%=%.h)
+MENUS_SOURCES = $(MENUS:%=%.h)
+
 all: bin
 
 elf: $(TARGET).elf
@@ -110,10 +126,21 @@ version.mak:
 endif
 
 c_ui.o: version.mak
+c_ui.o: $(BITMAPS_SOURCES) $(ICONS_SOURCES) $(MENUS_SOURCES)
+
+%.h: data/bitmaps/%.toml data/bitmaps/%.png
+	python3 $(TOOLSDIR)/img2src -o $@ $^
+
+%.h: data/icons/%.toml data/icons/%.png
+	python3 $(TOOLSDIR)/img2src -o $@ $^
+
+%.h: data/menus/%.toml
+	python3 $(TOOLSDIR)/menu2src -o $@ $<
 
 program: $(TARGET).bin
 	$(FWFLASH) $(TARGET).bin
 
 clean:
 	rm -f $(TARGET).elf $(TARGET).bin $(TARGET).sym $(TARGET).lst \
-	$(OBJECTS) $(OBJECTS:%.o=%.d) version.mak
+	$(OBJECTS) $(OBJECTS:%.o=%.d) version.mak \
+	$(BITMAPS_SOURCES) $(ICONS_SOURCES) $(MENUS_SOURCES)

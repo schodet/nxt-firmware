@@ -1,0 +1,161 @@
+#!/usr/bin/env python3
+#
+"""Convert menu to NXT data source file."""
+#
+# Copyright (C) 2024 Nicolas Schodet
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to
+# deal in the Software without restriction, including without limitation the
+# rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+# sell copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+# IN THE SOFTWARE.
+#
+import argparse
+import os
+import os.path
+import struct
+import sys
+
+import tomllib
+
+
+def print_hex(indent, bytes_or_fmt, *args, wrap=8, file=None):
+    """Print data as hexadecimal, use struct format."""
+    if not args:
+        data = bytes_or_fmt
+    else:
+        data = struct.pack(bytes_or_fmt, *args)
+    for i in range(0, len(data), wrap):
+        line = ", ".join(f"{b:#04x}" for b in data[i : i + wrap])
+        print(indent + line + ",", file=file)
+
+
+def encode_special(flags):
+    """Encode menu special flags."""
+    special_mask = 0
+    if "skip_this_mother_id" in flags and flags["skip_this_mother_id"]:
+        special_mask |= 0x00000001
+        special_mask |= flags["skip_this_mother_id"] << 28
+    if "enter_act_as_exit" in flags and flags["enter_act_as_exit"]:
+        special_mask |= 0x00000004
+    if "back_twice" in flags and flags["back_twice"]:
+        special_mask |= 0x00000008
+    if "exit_act_as_enter" in flags and flags["exit_act_as_enter"]:
+        special_mask |= 0x00000010
+    if "leave_background" in flags and flags["leave_background"]:
+        special_mask |= 0x00000020
+    if "exit_calls_with_ff" in flags and flags["exit_calls_with_ff"]:
+        special_mask |= 0x00000040
+    if "exit_leaves_menufile" in flags and flags["exit_leaves_menufile"]:
+        special_mask |= 0x00000080
+    if "init_calls_with_0" in flags and flags["init_calls_with_0"]:
+        special_mask |= 0x00000100
+    if "left_right_as_call" in flags and flags["left_right_as_call"]:
+        special_mask |= 0x00000200
+    if "enter_only_calls" in flags and flags["enter_only_calls"]:
+        special_mask |= 0x00000400
+    if "exit_only_calls" in flags and flags["exit_only_calls"]:
+        special_mask |= 0x00000800
+    if "auto_press_enter" in flags and flags["auto_press_enter"]:
+        special_mask |= 0x00001000
+    if "enter_leaves_menufile" in flags and flags["enter_leaves_menufile"]:
+        special_mask |= 0x00002000
+    if "init_calls" in flags and flags["init_calls"]:
+        special_mask |= 0x00004000
+    if "accept_incoming_request" in flags and flags["accept_incoming_request"]:
+        special_mask |= 0x00008000
+    if "back_three_times" in flags and flags["back_three_times"]:
+        special_mask |= 0x00010000
+    if "exit_disable" in flags and flags["exit_disable"]:
+        special_mask |= 0x00020000
+    if "exit_load_pointer" in flags and flags["exit_load_pointer"]:
+        special_mask |= 0x00040000
+        special_mask |= flags["exit_load_pointer"] << 24
+    if "exit_calls" in flags and flags["exit_calls"]:
+        special_mask |= 0x00080000
+    if "init_calls_with_1" in flags and flags["init_calls_with_1"]:
+        special_mask |= 0x00100000
+    if "exit_load_menu" in flags and flags["exit_load_menu"]:
+        special_mask |= 0x00200000
+    if "only_bt_on" in flags and flags["only_bt_on"]:
+        special_mask |= 0x00400000
+    if "only_datalog_enabled" in flags and flags["only_datalog_enabled"]:
+        special_mask |= 0x00800000
+    return special_mask
+
+
+def convert_menu(info, out_file):
+    """Convert to MENU format."""
+    item_size = 0x1D
+    items = info["items"]
+    data_size = item_size * len(items)
+    item_pixels_x = info["item_pixels_x"]
+    item_pixels_y = info["item_pixels_y"]
+    basename = os.path.basename(os.path.splitext(out_file)[0])
+    with open(out_file, "w") as f:
+        print(f"const UBYTE {basename}[] =", file=f)
+        print("{", file=f)
+        print_hex("  ", ">H", 0x0700, file=f)
+        print_hex("  ", ">H", data_size, file=f)
+        print_hex("  ", "B", item_size, file=f)
+        print_hex("  ", "B", len(items), file=f)
+        print_hex("  ", "B", item_pixels_x, file=f)
+        print_hex("  ", "B", item_pixels_y, file=f)
+        for i in items:
+            print("", file=f)
+            if i["icon_text"].strip():
+                print(f"  // {i['icon_text']}", file=f)
+            special_mask = 0
+            if "flags" in i:
+                special_mask = encode_special(i["flags"])
+            print_hex(
+                "  ",
+                ">LLBBBB",
+                i["item_id"],
+                special_mask,
+                i["function_index"],
+                i["function_parameter"],
+                i["file_load_no"],
+                i["next_menu"],
+                wrap=4,
+                file=f,
+            )
+            print_hex(
+                "  ", f"{item_size - 13}s", i["icon_text"].encode("ascii"), file=f
+            )
+            print_hex("  ", "B", i["icon_image_no"], file=f)
+        print("};", file=f)
+
+
+p = argparse.ArgumentParser(description=__doc__)
+p.add_argument("info", help="input TOML file")
+p.add_argument("-o", "--output", metavar="FILE", help="output header file")
+options = p.parse_args()
+
+try:
+    with open(options.info, "rb") as f:
+        info = tomllib.load(f)
+
+    if info["format"] == "menu":
+        convert_menu(info, options.output)
+    else:
+        raise RuntimeError("Unknown format")
+except Exception as e:
+    try:
+        os.remove(options.output)
+    except FileNotFoundError:
+        pass
+    print(e, file=sys.stderr)
+    sys.exit(1)

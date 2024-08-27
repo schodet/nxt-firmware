@@ -7,10 +7,12 @@ Details:
 
 - src/*: LEGO Open Source License.
 - src/d_sound_adpcm.r: Permissive license, see header.
+- data/*: LEGO Open Source License, converted from original files.
 - lib/*: Expat license, see header.
 - include/*: see header (provided "as is").
 - startup/*: see header (provided "as is").
 - armdebug/*: see armdebug/README (dual, LEGO Open Source License or GPLv2).
+- tools/*: Expat license, see header.
 - contrib/*: see header.
 - tests/*: Expat license, see header.
 

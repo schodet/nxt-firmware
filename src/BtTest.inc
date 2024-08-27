@@ -7,8 +7,8 @@
 #endif
 
 #ifdef TESTPRG
-#include  "Test1.txt"
-#include  "Test2.txt"
+#include  "Test1.h"
+#include  "Test2.h"
 #endif
 
 extern    void BtIo(void);

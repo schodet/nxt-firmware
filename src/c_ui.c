@@ -56,37 +56,37 @@ const     HEADER  cUi =
 
 // ****** GENERAL GRAPHIC RESOURCES ******************************************
 
-#include  "Display.txt"       // Bitmap for frame used in view and datalog
-#include  "LowBattery.txt"    // Bitmap showed when low battery occures
-#include  "Font.txt"          // Font used for all text
-#include  "Step.txt"          // Bitmap used in On Brick Programming
-#include  "Cursor.txt"        // Bitmap for cursor
-#include  "Running.txt"       // Icon collection used for "running" symbol
-#include  "Port.txt"          // Font used for naming sensor ports in datalog/bluetooth
-#include  "Ok.txt"            // Bitmap for OK buttom in get user string
-#include  "Wait.txt"          // Bitmap for feedback
-#include  "Fail.txt"          // Bitmap for feedback
-#include  "Info.txt"          // Bitmap for feedback
-#include  "Icons.txt"         // Icon collection used for menues
+#include  "Display.h"         // Bitmap for frame used in view and datalog
+#include  "LowBattery.h"      // Bitmap showed when low battery occures
+#include  "Font.h"            // Font used for all text
+#include  "Step.h"            // Bitmap used in On Brick Programming
+#include  "Cursor.h"          // Bitmap for cursor
+#include  "Running.h"         // Icon collection used for "running" symbol
+#include  "Port.h"            // Font used for naming sensor ports in datalog/bluetooth
+#include  "Ok.h"              // Bitmap for OK buttom in get user string
+#include  "Wait.h"            // Bitmap for feedback
+#include  "Fail.h"            // Bitmap for feedback
+#include  "Info.h"            // Bitmap for feedback
+#include  "Icons.h"           // Icon collection used for menues
 
 // ****** INTRO ANIMATION RESOURCES ******************************************
 
-#include  "RCXintro_1.txt"    // Bitmap for picture 1  in the intro animation
-#include  "RCXintro_2.txt"    // Bitmap for picture 2  in the intro animation
-#include  "RCXintro_3.txt"    // Bitmap for picture 3  in the intro animation
-#include  "RCXintro_4.txt"    // Bitmap for picture 4  in the intro animation
-#include  "RCXintro_5.txt"    // Bitmap for picture 5  in the intro animation
-#include  "RCXintro_6.txt"    // Bitmap for picture 6  in the intro animation
-#include  "RCXintro_7.txt"    // Bitmap for picture 7  in the intro animation
-#include  "RCXintro_8.txt"    // Bitmap for picture 8  in the intro animation
-#include  "RCXintro_9.txt"    // Bitmap for picture 9  in the intro animation
-#include  "RCXintro_10.txt"   // Bitmap for picture 10 in the intro animation
-#include  "RCXintro_11.txt"   // Bitmap for picture 11 in the intro animation
-#include  "RCXintro_12.txt"   // Bitmap for picture 12 in the intro animation
-#include  "RCXintro_13.txt"   // Bitmap for picture 13 in the intro animation
-#include  "RCXintro_14.txt"   // Bitmap for picture 14 in the intro animation
-#include  "RCXintro_15.txt"   // Bitmap for picture 15 in the intro animation
-#include  "RCXintro_16.txt"   // Bitmap for picture 16 in the intro animation
+#include  "RCXintro_1.h"      // Bitmap for picture 1  in the intro animation
+#include  "RCXintro_2.h"      // Bitmap for picture 2  in the intro animation
+#include  "RCXintro_3.h"      // Bitmap for picture 3  in the intro animation
+#include  "RCXintro_4.h"      // Bitmap for picture 4  in the intro animation
+#include  "RCXintro_5.h"      // Bitmap for picture 5  in the intro animation
+#include  "RCXintro_6.h"      // Bitmap for picture 6  in the intro animation
+#include  "RCXintro_7.h"      // Bitmap for picture 7  in the intro animation
+#include  "RCXintro_8.h"      // Bitmap for picture 8  in the intro animation
+#include  "RCXintro_9.h"      // Bitmap for picture 9  in the intro animation
+#include  "RCXintro_10.h"     // Bitmap for picture 10 in the intro animation
+#include  "RCXintro_11.h"     // Bitmap for picture 11 in the intro animation
+#include  "RCXintro_12.h"     // Bitmap for picture 12 in the intro animation
+#include  "RCXintro_13.h"     // Bitmap for picture 13 in the intro animation
+#include  "RCXintro_14.h"     // Bitmap for picture 14 in the intro animation
+#include  "RCXintro_15.h"     // Bitmap for picture 15 in the intro animation
+#include  "RCXintro_16.h"     // Bitmap for picture 16 in the intro animation
 
 const     BMPMAP *Intro[NO_OF_INTROBITMAPS] = // Picture sequence for the intro animation
 {
@@ -110,7 +110,7 @@ const     BMPMAP *Intro[NO_OF_INTROBITMAPS] = // Picture sequence for the intro 
 
 // ****** STATUS LINE GRAPHIC RESOURCES **************************************
 
-#include  "Status.txt"                  // Status icon collection file
+#include  "Status.h"                    // Status icon collection file
 
 enum STATUS_NO                          // Index in status icon collection file
 {
@@ -155,11 +155,11 @@ enum STATUS_NO                          // Index in status icon collection file
 
 // ****** BT DEVICE GRAPHIC RESOURCES ****************************************
 
-#include  "Devices.txt"       // Icon collection used for Blue tooth devices
+#include  "Devices.h"         // Icon collection used for Blue tooth devices
 
 // ****** BT CONNECTIONS GRAPHIC RESOURCES ***********************************
 
-#include  "Connections.txt"   // Icon collection used for Blue tooth connections
+#include  "Connections.h"     // Icon collection used for Blue tooth connections
 
 // ****** FREE TEXT GRAPHIC RESOURCES ****************************************
 
@@ -335,25 +335,25 @@ const     UWORD RechargeableLimits[BATTERYLIMITS] =
 
 //******* UI MENU FILE HANDLER *************************************************************************
 
-#include  "Mainmenu.rms"
-#include  "Submenu01.rms"
-#include  "Submenu02.rms"
-#include  "Submenu03.rms"
-#include  "Submenu04.rms"
-#include  "Submenu05.rms"
-#include  "Submenu06.rms"
-#include  "Submenu07.rms"
+#include  "Mainmenu.h"
+#include  "Submenu01.h"
+#include  "Submenu02.h"
+#include  "Submenu03.h"
+#include  "Submenu04.h"
+#include  "Submenu05.h"
+#include  "Submenu06.h"
+#include  "Submenu07.h"
 
 const     UBYTE *MenuPointers[] =
 {
-  (UBYTE*)MAINMENU,
-  (UBYTE*)SUBMENU01,
-  (UBYTE*)SUBMENU02,
-  (UBYTE*)SUBMENU03,
-  (UBYTE*)SUBMENU04,
-  (UBYTE*)SUBMENU05,
-  (UBYTE*)SUBMENU06,
-  (UBYTE*)SUBMENU07
+  (UBYTE*)Mainmenu,
+  (UBYTE*)Submenu01,
+  (UBYTE*)Submenu02,
+  (UBYTE*)Submenu03,
+  (UBYTE*)Submenu04,
+  (UBYTE*)Submenu05,
+  (UBYTE*)Submenu06,
+  (UBYTE*)Submenu07
 };
 
 

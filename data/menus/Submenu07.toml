@@ -1,0 +1,230 @@
+format = "menu"
+item_pixels_x = 24
+item_pixels_y = 24
+
+[[items]]
+item_id = 1
+function_index = 0
+function_parameter = 0
+file_load_no = 0
+next_menu = 1
+icon_text = "Search"
+icon_image_no = 86
+
+[items.flags]
+accept_incoming_request = true
+only_bt_on = true
+
+[[items]]
+item_id = 2
+function_index = 0
+function_parameter = 0
+file_load_no = 0
+next_menu = 1
+icon_text = "My contacts"
+icon_image_no = 82
+
+[items.flags]
+accept_incoming_request = true
+only_bt_on = true
+
+[[items]]
+item_id = 3
+function_index = 0
+function_parameter = 0
+file_load_no = 0
+next_menu = 1
+icon_text = "Connections"
+icon_image_no = 83
+
+[items.flags]
+accept_incoming_request = true
+only_bt_on = true
+
+[[items]]
+item_id = 4
+function_index = 0
+function_parameter = 0
+file_load_no = 0
+next_menu = 1
+icon_text = "Visibility"
+icon_image_no = 84
+
+[items.flags]
+accept_incoming_request = true
+only_bt_on = true
+
+[[items]]
+item_id = 5
+function_index = 0
+function_parameter = 0
+file_load_no = 0
+next_menu = 1
+icon_text = "On/Off"
+icon_image_no = 85
+
+[items.flags]
+accept_incoming_request = true
+
+[[items]]
+item_id = 17
+function_index = 18
+function_parameter = 255
+file_load_no = 0
+next_menu = 1
+icon_text = " "
+icon_image_no = 87
+
+[items.flags]
+init_calls_with_0 = true
+left_right_as_call = true
+
+[[items]]
+item_id = 18
+function_index = 0
+function_parameter = 0
+file_load_no = 0
+next_menu = 1
+icon_text = " "
+icon_image_no = 87
+
+[items.flags]
+auto_press_enter = true
+
+[[items]]
+item_id = 19
+function_index = 20
+function_parameter = 246
+file_load_no = 0
+next_menu = 1
+icon_text = " "
+icon_image_no = 87
+
+[items.flags]
+init_calls_with_0 = true
+left_right_as_call = true
+
+[[items]]
+item_id = 20
+function_index = 17
+function_parameter = 235
+file_load_no = 0
+next_menu = 0
+icon_text = "Visible"
+icon_image_no = 90
+
+[[items]]
+item_id = 36
+function_index = 17
+function_parameter = 234
+file_load_no = 0
+next_menu = 0
+icon_text = "Invisible"
+icon_image_no = 91
+
+[[items]]
+item_id = 21
+function_index = 3
+function_parameter = 235
+file_load_no = 0
+next_menu = 0
+icon_text = "On"
+icon_image_no = 92
+
+[items.flags]
+exit_leaves_menufile = true
+
+[[items]]
+item_id = 37
+function_index = 3
+function_parameter = 234
+file_load_no = 0
+next_menu = 0
+icon_text = "Off"
+icon_image_no = 93
+
+[items.flags]
+exit_leaves_menufile = true
+only_bt_on = true
+
+[[items]]
+item_id = 273
+function_index = 19
+function_parameter = 242
+file_load_no = 0
+next_menu = 1
+icon_text = " "
+icon_image_no = 87
+
+[items.flags]
+back_twice = true
+init_calls_with_0 = true
+left_right_as_call = true
+
+[[items]]
+item_id = 274
+function_index = 19
+function_parameter = 242
+file_load_no = 0
+next_menu = 2
+icon_text = " "
+icon_image_no = 87
+
+[items.flags]
+back_twice = true
+left_right_as_call = true
+init_calls_with_1 = true
+
+[[items]]
+item_id = 275
+function_index = 20
+function_parameter = 240
+file_load_no = 0
+next_menu = 0
+icon_text = "Disconnect"
+icon_image_no = 89
+
+[[items]]
+item_id = 4369
+function_index = 16
+function_parameter = 245
+file_load_no = 0
+next_menu = 0
+icon_text = " "
+icon_image_no = 87
+
+[items.flags]
+init_calls_with_0 = true
+left_right_as_call = true
+
+[[items]]
+item_id = 4370
+function_index = 19
+function_parameter = 241
+file_load_no = 0
+next_menu = 0
+icon_text = "Delete"
+icon_image_no = 52
+
+[[items]]
+item_id = 8466
+function_index = 0
+function_parameter = 0
+file_load_no = 0
+next_menu = 1
+icon_text = "Connect"
+icon_image_no = 88
+
+[[items]]
+item_id = 74002
+function_index = 16
+function_parameter = 245
+file_load_no = 0
+next_menu = 0
+icon_text = " "
+icon_image_no = 87
+
+[items.flags]
+back_twice = true
+init_calls_with_0 = true
+left_right_as_call = true
