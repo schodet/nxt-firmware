@@ -2,8 +2,10 @@
 *.lst
 *.sym
 *.elf
+*.bin
+*.rfw
 /*.h
 tags
 version.mak
-nxt_firmware.bin
-nxt_firmware.rfw
+*.tar.gz
+*.asc
