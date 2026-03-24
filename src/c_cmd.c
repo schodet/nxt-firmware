@@ -1444,7 +1444,7 @@ NXT_STATUS cCmdReadFileHeader(UBYTE* pData, ULONG DataSize,
     ULONG NativeOffset;
     pCursor = (pData + 12);
     NativeOffset = (ULONG)(*pCursor);
-    void (*native)(ULONG, ULONG) = (void (*)())(pData + NativeOffset);
+    void (*native)(ULONG, ULONG) = (void (*)(ULONG, ULONG))(pData + NativeOffset);
     (*native)((ULONG)pData, DataSize);
     NXT_BREAK;
     return (ERR_VER);
