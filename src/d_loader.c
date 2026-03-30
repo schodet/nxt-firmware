@@ -922,7 +922,7 @@ UWORD     dLoaderAllocateHeader(UWORD Handle, ULONG *FileStartAdr, FILEHEADER *p
             HeaderSectorSize--;
             if (0 == HeaderSectorSize)
             {
-              pHeader->FileStartAdr = (((SectorIndex << 5) + Tmp) << SECTORSIZESHIFT) + (HeaderByteSize - (TmpHSS<<SECTORSIZESHIFT)) | FLASHOFFSET;
+              pHeader->FileStartAdr = ((((SectorIndex << 5) + Tmp) << SECTORSIZESHIFT) + (HeaderByteSize - (TmpHSS<<SECTORSIZESHIFT))) | FLASHOFFSET;
               ExitCode = TRUE;
             }
           }

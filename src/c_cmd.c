@@ -4957,7 +4957,7 @@ ULONG cCmdUnop2(CODE_WORD const Code, ULONG Operand, TYPE_CODE TypeCode)
   else if(opCode == OP_TST)
     return cCmdCompare(COMP_CODE((&Code)), Operand, 0, TypeCode, TypeCode);
   else if(opCode == OP_ABS)
-    return abs(Operand);
+    return abs((SLONG)Operand);
   else
   {
     //Unrecognized instruction, NXT_BREAK for easy debugging (ERR_INSTR handled in caller)
@@ -6452,7 +6452,7 @@ NXT_STATUS cCmdLSWrite(UBYTE Port, UBYTE BufLength, UBYTE *pBuf, UBYTE ResponseL
   //Only start writing process if port is properly configured and c_lowspeed module is ready
   if ((pInput->SensorType == LOWSPEED_9V || pInput->SensorType == LOWSPEED)
    && (pInput->InvalidData == FALSE)
-   && (*pChState == LOWSPEED_IDLE) || (*pChState == LOWSPEED_ERROR))
+   && (*pChState == LOWSPEED_IDLE || *pChState == LOWSPEED_ERROR))
   {
     pOutBuf->InPtr = 0;
     pOutBuf->OutPtr = 0;
